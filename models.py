@@ -33,7 +33,7 @@ class CovidResource(BaseModel):
     contact = Column(Text(collation='utf8mb4_unicode_ci'))
     description = Column(Text(collation='utf8mb4_unicode_ci'))
     organisation = Column(String(256))
-    phone = Column(Text())
+    phone = Column(Text(collation='utf8mb4_unicode_ci'))
     #id = Column(String(16), primary_key=True)
     state = Column(String(64))
 
