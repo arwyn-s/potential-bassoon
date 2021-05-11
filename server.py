@@ -67,7 +67,7 @@ async def get_all_cities(request):
         stmt = select(CovidResource.city).distinct()
         result = await session.execute(stmt)
         cities = result.all()
-        logger.debug(cities)
+        logger.info(cities)
         # session.add_all([person])
     return json(cities)
 
