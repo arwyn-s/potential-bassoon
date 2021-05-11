@@ -88,12 +88,20 @@ async def get_all_categories(request):
 @app.get("/resource")
 async def guery_resource(request):
     session = request.ctx.session
-    city = request.args.get("city", "")
-    category = request.args.get("category", "")
+    city = request.args.get("city", None)
+    category = request.args.get("category", None)
     async with session.begin():
-        stmt = select(CovidResource).where(
-            and_(CovidResource.city == city, CovidResource.category == category)
-        )
+        if city and category:
+            stmt = select(CovidResource).where(
+                and_(CovidResource.city == city, CovidResource.category == category)
+            )
+        elif city:
+            stmt = select(CovidResource).where(CovidResource.city == city)
+        elif category:
+            stmt = select(CovidResource).where(CovidResource.category == category)
+        else:
+            stmt = select(CovidResource)
+
         result = await session.execute(stmt)
         data = result.all()
         # session.add_all([person])
