@@ -39,14 +39,14 @@ from sanic.response import json
 from models import Car, Person, CovidResources
 
 
-@app.post("/user")
-async def create_user(request):
-    session = request.ctx.session
-    async with session.begin():
-        car = Car(brand="Tesla")
-        person = Person(name="foo", cars=[car])
-        session.add_all([person])
-    return json(person.to_dict())
+# @app.post("/user")
+# async def create_user(request):
+#     session = request.ctx.session
+#     async with session.begin():
+#         car = Car(brand="Tesla")
+#         person = Person(name="foo", cars=[car])
+#         session.add_all([person])
+#     return json(person.to_dict())
 
 # @app.get("/update")
 # async def create_user(request):
@@ -67,18 +67,30 @@ async def get_all_cities(request):
         # session.add_all([person])
     return json(cities)
 
-@app.get("/user/<pk:int>")
-async def get_user(request, pk):
+
+@app.get("/categories")
+async def get_all_categories(request):
     session = request.ctx.session
     async with session.begin():
-        stmt = select(Person).where(Person.id == pk).options(selectinload(Person.cars))
+        stmt = select(CovidResources.category).distinct()
         result = await session.execute(stmt)
-        person = result.scalar()
+        cities = result.scalar()
+        # session.add_all([person])
+    return json(cities)
 
-    if not person:
-        return json({})
 
-    return json(person.to_dict())
+# @app.get("/user/<pk:int>")
+# async def get_user(request, pk):
+#     session = request.ctx.session
+#     async with session.begin():
+#         stmt = select(Person).where(Person.id == pk).options(selectinload(Person.cars))
+#         result = await session.execute(stmt)
+#         person = result.scalar()
+
+#     if not person:
+#         return json({})
+
+#     return json(person.to_dict())
 
 
 app.run(host="0.0.0.0", port=8000, debug=True, auto_reload=True)
