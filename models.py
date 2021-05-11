@@ -11,7 +11,7 @@ class BaseModel(Base):
 
 class Person(BaseModel):
     __tablename__ = "person"
-    name = Column(String())
+    name = Column(String(16))
     cars = relationship("Car")
 
     def to_dict(self):
@@ -21,6 +21,6 @@ class Person(BaseModel):
 class Car(BaseModel):
     __tablename__ = "car"
 
-    brand = Column(String())
+    brand = Column(String(16))
     user_id = Column(ForeignKey("person.id"))
     user = relationship("Person", back_populates="cars")
