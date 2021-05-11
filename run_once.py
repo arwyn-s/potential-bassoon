@@ -21,7 +21,7 @@ with httpx.Client() as client:
             category=entry["category"],
             city=entry["city"],
             contact=entry["contact"],
-            description=entry["descriptionandorserviceprovided"],
+            description=str(entry["descriptionandorserviceprovided"], 'utf-8'),
             organisation=entry["nameoftheorganisation"],
             phone=entry["phonenumber"],
             state=entry["state"]
