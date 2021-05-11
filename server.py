@@ -1,5 +1,4 @@
 from sanic import Sanic
-import httpx
 from sqlalchemy.ext.asyncio import create_async_engine
 
 app = Sanic("my_app")
@@ -36,7 +35,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import selectinload
 from sanic.response import json
 
-from models import Car, Person, CovidResources
+from models import CovidResource
 
 
 # @app.post("/user")
@@ -61,7 +60,7 @@ from models import Car, Person, CovidResources
 async def get_all_cities(request):
     session = request.ctx.session
     async with session.begin():
-        stmt = select(CovidResources.city).distinct()
+        stmt = select(CovidResource.city).distinct()
         result = await session.execute(stmt)
         cities = result.scalar()
         # session.add_all([person])
@@ -72,7 +71,7 @@ async def get_all_cities(request):
 async def get_all_categories(request):
     session = request.ctx.session
     async with session.begin():
-        stmt = select(CovidResources.category).distinct()
+        stmt = select(CovidResource.category).distinct()
         result = await session.execute(stmt)
         cities = result.scalar()
         # session.add_all([person])
