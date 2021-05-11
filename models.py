@@ -1,4 +1,4 @@
-from sqlalchemy import INTEGER, Column, ForeignKey, String
+from sqlalchemy import INTEGER, Column, ForeignKey, String, UnicodeText
 from sqlalchemy.orm import declarative_base, relationship
 
 Base = declarative_base()
@@ -31,7 +31,7 @@ class CovidResource(BaseModel):
     category = Column(String(64))
     city = Column(String(64))
     contact = Column(String(2048))
-    description = Column(String(2048))
+    description = Column(UnicodeText())
     organisation = Column(String(256))
     phone = Column(String(64))
     #id = Column(String(16), primary_key=True)
