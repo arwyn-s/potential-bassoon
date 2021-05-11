@@ -5,7 +5,7 @@ from sqlalchemy.ext.asyncio import create_async_engine
 app = Sanic("my_app")
 
 bind = create_async_engine(
-    "mysql+aiomysql://admin:mysqluser@sample-rds.cb1iygfrr3j4.us-east-2.rds.amazonaws.com/test",
+    "mysql+aiomysql://admin:mysqluser@sample-rds.cb1iygfrr3j4.us-east-2.rds.amazonaws.com/covid",
     echo=True,
 )
 
