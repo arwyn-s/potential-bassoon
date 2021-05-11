@@ -30,8 +30,8 @@ class CovidResource(BaseModel):
     __tablename__ = "resources"
     category = Column(String(64))
     city = Column(String(64))
-    contact = Column(String(256))
-    description = Column(String(1024))
+    contact = Column(String(2048))
+    description = Column(String(2048))
     organisation = Column(String(256))
     phone = Column(String(64))
     #id = Column(String(16), primary_key=True)
