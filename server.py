@@ -1,4 +1,5 @@
 from sanic import Sanic
+import httpx
 from sqlalchemy.ext.asyncio import create_async_engine
 
 app = Sanic("my_app")
@@ -35,7 +36,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import selectinload
 from sanic.response import json
 
-from models import Car, Person
+from models import Car, Person, CovidResources
 
 
 @app.post("/user")
@@ -47,6 +48,24 @@ async def create_user(request):
         session.add_all([person])
     return json(person.to_dict())
 
+# @app.get("/update")
+# async def create_user(request):
+#     session = request.ctx.session
+#     resources.
+#     async with httpx.AsyncClient() as client:
+#         res = await client.get('https://api.covid19india.org/resources/resources.json')
+#     async with session.begin():
+
+
+@app.get("/cities")
+async def get_all_cities(request):
+    session = request.ctx.session
+    async with session.begin():
+        stmt = select(CovidResources.city).distinct()
+        result = await session.execute(stmt)
+        cities = result.scalar()
+        # session.add_all([person])
+    return json(cities)
 
 @app.get("/user/<pk:int>")
 async def get_user(request, pk):

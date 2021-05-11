@@ -1,4 +1,4 @@
 {
-    "python.pythonPath": "sanic_env/bin/python",
+    "python.pythonPath": "/home/arwyn/chimera/py_dev/bin/python3.8",
     "python.formatting.provider": "black"
 }
