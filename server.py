@@ -105,9 +105,9 @@ async def guery_resource(request):
         result = await session.execute(stmt)
         # print(result)
         data = result.all()
-        print(data)
+        # print(data)
         # session.add_all([person])
-    return json({"data": [resource.to_dict() for resource in data]})
+    return json({"data": [resource[0].to_dict() for resource in data]})
 
 
 # @app.get("/user/<pk:int>")
