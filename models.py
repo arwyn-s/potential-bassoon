@@ -4,9 +4,9 @@ from sqlalchemy.orm import declarative_base, relationship
 Base = declarative_base()
 
 
-# class BaseModel(Base):
-#     __abstract__ = True
-#     id = Column(INTEGER(), primary_key=True)
+class BaseModel(Base):
+    __abstract__ = True
+    id = Column(INTEGER(), primary_key=True)
 
 
 # class Person(BaseModel):
@@ -26,7 +26,7 @@ Base = declarative_base()
 #     user = relationship("Person", back_populates="cars")
 
 
-class CovidResource(Base):
+class CovidResource(BaseModel):
     __tablename__ = "resources"
     category = Column(String(64))
     city = Column(String(64))
@@ -34,6 +34,7 @@ class CovidResource(Base):
     description = Column(String(256))
     organisation = Column(String(128))
     phone = Column(String(64))
+    #id = Column(String(16), primary_key=True)
     state = Column(String(64))
 
     def to_dict(self):
