@@ -67,9 +67,9 @@ async def get_all_cities(request):
         stmt = select(CovidResource.city).distinct()
         result = await session.execute(stmt)
         cities = result.all()
-        print(cities)
+        # print(cities)
         # session.add_all([person])
-    return json(cities)
+    return json({'data': [city[0] for city in cities]})
 
 
 @app.get("/categories")
@@ -80,7 +80,7 @@ async def get_all_categories(request):
         result = await session.execute(stmt)
         categories = result.all()
         # session.add_all([person])
-    return json(categories)
+    return json({'data': [cat[0] for cat in categories]})
 
 
 # @app.get("/user/<pk:int>")
