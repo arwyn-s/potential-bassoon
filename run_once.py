@@ -6,8 +6,7 @@ import models
 import httpx
 
 engine = create_engine(
-    "mysql+pymysql://admin:mysqluser@sample-rds.cb1iygfrr3j4.us-east-2.rds.amazonaws.com/covid",
-    chartset="utf8mb4",
+    "mysql+pymysql://admin:mysqluser@sample-rds.cb1iygfrr3j4.us-east-2.rds.amazonaws.com/covid?charset=utf8mb4",
 )
 models.Base.metadata.create_all(engine)
 Session = sessionmaker(bind=engine)
