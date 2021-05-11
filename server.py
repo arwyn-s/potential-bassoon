@@ -1,5 +1,7 @@
+from operator import and_
 from sanic import Sanic
 from sqlalchemy.ext.asyncio import create_async_engine
+
 # import logging
 
 from sqlalchemy.util.compat import local_dataclass_fields
@@ -69,7 +71,7 @@ async def get_all_cities(request):
         cities = result.all()
         # print(cities)
         # session.add_all([person])
-    return json({'data': [city[0] for city in cities]})
+    return json({"data": [city[0] for city in cities]})
 
 
 @app.get("/categories")
@@ -80,7 +82,22 @@ async def get_all_categories(request):
         result = await session.execute(stmt)
         categories = result.all()
         # session.add_all([person])
-    return json({'data': [cat[0] for cat in categories]})
+    return json({"data": [cat[0] for cat in categories]})
+
+
+@app.get("/resource")
+async def guery_resource(request):
+    session = request.ctx.session
+    city = request.args.get("city", "")
+    category = request.args.get("category", "")
+    async with session.begin():
+        stmt = select(CovidResource).where(
+            and_(CovidResource.city == city, CovidResource.category == category)
+        )
+        result = await session.execute(stmt)
+        data = result.all()
+        # session.add_all([person])
+    return json({"data": [resource.to_dict() for resource in data]})
 
 
 # @app.get("/user/<pk:int>")
