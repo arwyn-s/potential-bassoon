@@ -62,5 +62,4 @@ async def get_user(request, pk):
     return json(person.to_dict())
 
 
-if __name__ == "main":
-    app.run(host="0.0.0.0", port=8005, debug=True, auto_reload=True)
+app.run(host="0.0.0.0", port=8005, debug=True, auto_reload=True)

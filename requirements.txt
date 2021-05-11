@@ -1,4 +1,5 @@
 aiofiles==0.6.0
+aiomysql==0.0.21
 certifi==2020.12.5
 greenlet==1.1.0
 h11==0.9.0
@@ -7,6 +8,7 @@ httptools==0.2.0
 httpx==0.15.4
 idna==3.1
 multidict==5.1.0
+PyMySQL==0.9.3
 rfc3986==1.5.0
 sanic==20.12.0
 sniffio==1.2.0
