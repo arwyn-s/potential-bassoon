@@ -31,7 +31,7 @@ class CovidResource(BaseModel):
     category = Column(String(64))
     city = Column(String(64))
     contact = Column(String(2048))
-    description = Column(Text())
+    description = Column(Text(collation='utf8mb4_unicode_ci'))
     organisation = Column(String(256))
     phone = Column(String(64))
     #id = Column(String(16), primary_key=True)
