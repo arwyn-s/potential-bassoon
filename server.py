@@ -62,4 +62,4 @@ async def get_user(request, pk):
     return json(person.to_dict())
 
 
-app.run(host="0.0.0.0", port=80, debug=True, auto_reload=True)
+app.run(host="0.0.0.0", port=8000, debug=True, auto_reload=True)
