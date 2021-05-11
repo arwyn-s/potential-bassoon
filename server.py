@@ -1,6 +1,10 @@
 from sanic import Sanic
 from sqlalchemy.ext.asyncio import create_async_engine
+import logging
 
+from sqlalchemy.util.compat import local_dataclass_fields
+
+logger = logging.getLogger(__name__)
 app = Sanic("my_app")
 
 bind = create_async_engine(
@@ -63,6 +67,7 @@ async def get_all_cities(request):
         stmt = select(CovidResource.city).distinct()
         result = await session.execute(stmt)
         cities = result.all()
+        logger.debug(cities)
         # session.add_all([person])
     return json(cities)
 
