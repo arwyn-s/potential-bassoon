@@ -103,7 +103,9 @@ async def guery_resource(request):
             stmt = select(CovidResource)
 
         result = await session.execute(stmt)
+        # print(result)
         data = result.all()
+        print(data)
         # session.add_all([person])
     return json({"data": [resource.to_dict() for resource in data]})
 
