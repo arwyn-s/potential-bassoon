@@ -8,7 +8,7 @@ import httpx
 engine = create_engine(
     "mysql+pymysql://admin:mysqluser@sample-rds.cb1iygfrr3j4.us-east-2.rds.amazonaws.com/covid"
 )
-models.Base.metadata.create_all()
+models.Base.metadata.create_all(engine)
 Session = sessionmaker(bind=engine)
 session = Session()
 # async with httpx.AsyncClient() as client:
